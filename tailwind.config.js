@@ -18,7 +18,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
+        border: "var(--primary) ",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
@@ -42,6 +42,10 @@ module.exports = {
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
+        },
+        alte : {
+          DEFAULT : "var(--alte)",
+          foreground : "var(--alte-foreground)",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
