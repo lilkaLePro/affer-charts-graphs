@@ -3,10 +3,12 @@ import NavLinks from "./navLink";
 
 const SideNav = () => {
     return (
-        <div className="">
-            <p className="text-lg font-semibold text-center p-5 ">menu</p>
-
-            <NavLinks />
+        <div className="justify-between min-h-screen">
+            <div>
+                <p className="text-lg font-semibold p-5 ">menu</p>
+                <NavLinks />
+            </div>
+            
         </div>
     )
 }
