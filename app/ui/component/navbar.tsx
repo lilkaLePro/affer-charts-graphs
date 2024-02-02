@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import { FileSpreadsheet, HomeIcon, Space } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { AuthButton } from '../AuthButton'
 
 
 const links = [
@@ -36,6 +37,7 @@ return (
     )
   }) 
 }
+<AuthButton />
 </div>
 
 )}

@@ -1,5 +1,12 @@
+import { Button } from "@/app/ui/button";
+import { BarChart } from "@/app/ui/component/charts/barchart";
+
 export default async function Page(){
 
-    return(<div>
-    salut a tout le monde</div>)
+    return(<div className="">
+        
+        <div className="shadow-md ">
+            <BarChart />
+        </div>
+    </div>)
 }

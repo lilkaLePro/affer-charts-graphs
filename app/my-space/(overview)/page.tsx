@@ -7,7 +7,7 @@ export default async function Page() {
     
     return (
         <div className="grid grid-cols-2 gap-20 h-full overflow-auto bg-accent p-10" >
-
+            
            <StateCards />
 
            <div className="flex gap-6 ">
