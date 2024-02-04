@@ -4,13 +4,12 @@ import Link from "next/link"
 import { Button } from "./ui/button"
 import Navbar from "./ui/component/navbar"
 import { Plus } from "lucide-react"
-import { BartChart } from "./ui/component/charts/barchart"
 
 export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between md:px-24 px-4">
-      <div className='shadow-md w-full h-[50px] fixed bg-accent justify-center items-center hidden md:flex'>
+      <div className='shadow-md w-full h-[50px] fixed bg-accent justify-center items-center md:flex'>
         <Navbar />
       </div>
 
@@ -27,8 +26,6 @@ export default function Home() {
       <div className="mb-32 mt-32 lg:max-w-5xl lg:w-full flex flex-col gap-10">
         
         <div className='w-full md:grid grid-cols-1 gap-3  bg-popover'>
-          <div className='h-44 overflow-hidden border text-center'><BartChart /> </div>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, magni reprehenderit voluptas amet autem, tenetur inventore magnam, quis a itaque sequi possimus eaque atque? Excepturi officiis architecto velit quia quod.</p>
         </div>
 
         <div className='w-full grid md:grid-cols-2 gap-3  bg-popover '>

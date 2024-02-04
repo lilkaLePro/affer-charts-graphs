@@ -15,9 +15,12 @@ type UseAppstore  = {
     updateSvgW : () => void,
     svgH : number,
     updateSvgH: () => void,
-    datas : Population[],
     menuW : number,
     updateMenuW : () => void,
+    datax : any,
+    datay :any,
+    updateDatay : () => void,
+    updateDatax : () => void,
 
 }
 
@@ -28,7 +31,7 @@ export const useAppstore = create<UseAppstore>((set) => ({
     updateLength(length : {length : number}) {
         set({length: length})
     },
-    displayGroupex: false ,
+    displayGroupex: true ,
     updateDisplayGroupex(displayGroupex: {displayGroupex : boolean }){
         set({displayGroupex: displayGroupex})
     },
@@ -48,15 +51,19 @@ export const useAppstore = create<UseAppstore>((set) => ({
     updateSvgH(svgH : {svgH : number}){
         set({svgH: svgH})
     },
-    menuW : 52,
+    menuW : 80,
     updateMenuW(menuW : {manuW : number}){
         set({menuW : menuW})
     },
-    datas: [population],
-    updateData(dataX) {
-        set({datas: datas})
+    datax : [],
+    updateDatax(datax : {datax : string | number}){
+        set({datax : datax})
     },
-    
+    datay : [],
+    updateDatay(datay : {datay : number}){
+        set({datay : datay})
+    }
+
 }))
 
 

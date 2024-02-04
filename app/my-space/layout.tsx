@@ -19,7 +19,7 @@ export default function Layout ({ children }: {children: React.ReactNode}){
                     <div className='text-secondary w-8 h-8 bg-destructive font-semibold flex justify-center items-center rounded-sm'>Affer</div>
                     </Button>
                 </Link>
-                <div className="cursor-pointer text-destructive p-[] rounded-lg border">
+                <div className="cursor-pointer text-destructive rounded-lg border">
                     <Menu className=" hover:bg-muted  m-2"/>
                     <X className="hidden"/>
                 </div>

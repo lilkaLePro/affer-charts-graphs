@@ -7,7 +7,7 @@ const SideNav = () => {
     const {menuW , updateMenuW} = useAppstore()
 
     return (
-        <div className={`justify-between min-h-screen border  w-${menuW}`}>
+        <div className={`justify-between min-h-screen border  w-64`}>
             <div>
                <Button variant='outline' className="mt-7 mb-3 font-semibold ml-5 hover:bg-background py-1">
                 Menu

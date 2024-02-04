@@ -1,14 +1,15 @@
 "use client"
 import * as d3  from "d3";
 import React, { useEffect, useRef, useState } from "react"
-import { number } from "zod";
 import {scaleLinear , scaleBand} from 'd3-scale'
 import applestok from '@visx/mock-data/lib/mocks/appleStock'
+import { useAppstore } from "@/store";
+import {axisLeft , axisBottom} from 'd3-axis'
 
 
 const datas = applestok.slice(80 , 100);
-const data = [
-    {height : 500 , color : 'purple'},
+const ini_data = [
+    {height : 10 , color : 'purple'},
     {height : 270 , color : 'orange'},
     {height : 510 , color : 'red'},
     {height : 437 , color : 'yellow'},
@@ -16,61 +17,70 @@ const data = [
     {height : 237 , color : 'darkgreen'},
     {height : 137 , color : 'blue'},
 ]
-
-const dimensions = {
-    width : 1000,
-    height : 500,
-    chartWidth : 700,
-    chartHeight : 400,
-    marginLeft : 100,
+const dimension = {
+    width : 600,
+    height : 400,
+    marginLeft : 50,
 }
 
 export const BarChart : React.FC = () => {
-    const svgRef = useRef<SVGSVGElement | null>(null);
-    const [selection , setselection] = useState< null | Selection< null ,unknown, null, undefined >>(null)
+const svgRef = useRef<SVGSVGElement | null >(null)
+const [selection , setSelection] = useState<null | d3.Selection< SVGSVGElement | null , unknown , null , undefined >>()
+const [data , setData] = useState(ini_data)
+const {fill , displayGroupex , displayGroupey} = useAppstore()
 
-// const yAxis = axisLeft
+useEffect(() => {
 
-    useEffect(() => {
-         // scales x and y
-    const y = scaleLinear()
-        .domain([0 , d3.max(datas , d => d.close)])
-        .range([0 , dimensions.chartHeight])
-    const x = scaleBand()
-        .domain(datas.map(d => d.date))
-        .range([0 , dimensions.chartWidth])
-        .paddingInner(0.2).paddingOuter(0.05)
+// scales x & y
+const x = scaleBand()
+    .domain(data.map(d => d.color))
+    .range([0, dimension.width])
+    .padding(0.05)
 
-        if(!selection){
-            setselection(d3.select(svgRef.current!)) //ici le '!' regle la plainte de typescripte
-        }else {
-            selection 
-                .append('rect')
-                .attr('width' , dimensions.width)
-                .attr('height' , dimensions.height)
-                .attr('fill' , 'whitesmoke')
+const y = scaleLinear()
+    .domain([0 , d3.max(data.map(d => d.height))])
+    .range([dimension.height , 0])
 
-            selection 
-                .append('g')
-                .attr('transform' , `translate(${dimensions.marginLeft} , 0)`)
-                .selectAll('rect')
-                .data(datas)
-                .enter()
-                .append('rect')
-                .attr('width' , 25)
-                .attr('fill' , 'orange' )
-                // .stroke('red')
-                // .strokeWidth(1)
-                .attr('x', d =>{
-                    const xValue = x(d.date)
-                    if(xValue){
-                        return xValue
-                    }else null
-                })
-                .attr('height', d => y(d.close))
-        }
-    },[selection])
+    // axis
+const xAxis = axisBottom(x)
+const yaxis = axisLeft(y)
 
-    return(<svg ref={svgRef} width={dimensions.width} height={dimensions.height}>
-    </svg>)
+    if(!selection){
+        setSelection(d3.select(svgRef.current!))
+    }else{
+        const xAxisGroup =  selection
+        .append('g')
+        .call(xAxis)
+        .attr('transform' , `translate( ${dimension.marginLeft}, ${dimension.height})`)
+        
+        const yAxisGroup = selection
+        .append('g')
+        .call(yaxis)
+        .attr('transform' , `translate( ${dimension.marginLeft})`)
+        
+        selection
+            .selectAll('rect')
+            .data(data)
+            .enter()
+            .append('rect')
+            .attr('width' , x.bandwidth)
+            .attr('height' , 0)
+            .attr('x' , d => x(d.color))
+            .attr('y' , dimension.height)
+            .attr('fill' , "blue")
+            .attr('transform' , `translate(${dimension.marginLeft } )`)
+            .transition()
+            .duration(1000)
+            .delay(( _ , i ) => i*100)
+            .attr('fill' , 'orange')
+            .attr('height' , d => dimension.height - y(d.height))
+            .attr('y' , d => y(d.height))
+
+
+    }
+},[selection , data])
+
+    return(<div className="flex justify-center items-center border w-[800px] h-[500px] p-6 m-2 ">
+        <svg ref={svgRef} className="w-full h-full font-bold" />
+    </div>)
 }

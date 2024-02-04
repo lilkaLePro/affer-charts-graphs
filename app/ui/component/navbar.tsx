@@ -31,7 +31,7 @@ return (
        { "border-b-2 text-destructive hover:border-none" : pathname === link.href }
       )} >
         <LinkIcone className='w-5 h-5' />
-        <p className='font-semibold text-[18px] '>{link.name}</p>
+        <p className='font-semibold text-[18px] hidden md:block'>{link.name}</p>
       </Link>
       
     )

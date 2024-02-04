@@ -4,6 +4,7 @@ import clsx from "clsx"
 import { useAppstore} from "@/store"
 import { Checkbox } from "../../checkbox"
 import { Button } from "../../button"
+import React from "react"
 
 export type chartparams = {
     barLength : number,
@@ -12,7 +13,7 @@ export type chartparams = {
     className : string,
 }
 
- const ChartParams = () => {
+ const ChartParams : React.FC = () => {
     
     const {length , updateLength, displayGroupex,updateDisplayGroupex,
         displayGroupey, updateDisplayGroupey, svgW , updateSvgW ,strokewidth,
@@ -21,17 +22,17 @@ export type chartparams = {
     return (<div className="border flex flex-col gap-4 px-5">
 
         <div className="flex gap-5 ">
-            <InputEl onchange={(e :{e : number | string}) => updateLength(e.target.value)} name="length" value={length} label="length" />
-            <InputEl name="width" value={svgW} label="width" onchange={(e :{e : number | string}) => updateSvgW(e.target.value)} />
-            <InputEl name="height" value={svgH} label="height" onchange={(e :{e: number | string}) => updateSvgH(e.target.value)} />
+            <InputEl onchange={(e :{e : number | string}) => updateLength()} name="length" value={length} label="length" />
+            <InputEl name="width" value={svgW} label="width" onchange={() => updateSvgW()} />
+            <InputEl name="height" value={svgH} label="height" onchange={() => updateSvgH()} />
         </div>
 
         <div className="flex gap-4 items-center">
             <CheckBox label="x-axis" checked={displayGroupex} 
-            onchange={()=> updateDisplayGroupex(!displayGroupex) } />
+            onchange={()=> updateDisplayGroupex() } />
             <CheckBox label="y-axis" checked={displayGroupey} 
-            onchange={()=> updateDisplayGroupey(!displayGroupey)}/>
-             <InputEl name="stroke" value={strokewidth} label="stroke" onchange={(e : {e : number | string}) => updateStroke(e.target.value)}/>
+            onchange={()=> updateDisplayGroupey()}/>
+             <InputEl name="stroke" value={strokewidth} label="stroke" onchange={() => updateStroke()}/>
            {/* faire le stroke */}
         </div>
         <div>
