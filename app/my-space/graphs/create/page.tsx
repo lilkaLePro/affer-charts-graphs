@@ -6,7 +6,7 @@ export default async function Page(){
 
     return(<div className="">
         
-        <div className="shadow-md ">
+        <div className="shadow-md w-[800px] h-[500px]">
             <CurvChart />
             {/* <BarChart /> */}
         </div>

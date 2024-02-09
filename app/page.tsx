@@ -14,9 +14,9 @@ export default function Home() {
       </div>
 
       <div className="relative mt-32 text-center flex flex-col gap-5 place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1] md:max-w-3xl">
-        <h1 className='md:text-6xl text-primary text-4xl font-bold '><span className='text-destructive'>Save</span> hours by <span className='text-destructive'>bringing data to life</span> few click </h1>
-        <div className="flex gap-10">
-        <Link href='/'>
+        <h1 className='md:text-6xl text-primary text-4xl font-bold '><span className='text-destructive'>Save</span> hours by <span className='text-destructive'>bringing data to life</span> in a few click </h1>
+        <div className="flex gap-10 mt-10">
+        <Link href='/my-space/graphs/create'>
           <Button variant='destructive' className="text-md cursor-pointer">
           <Plus /> Start Creating  </Button>
         </Link>

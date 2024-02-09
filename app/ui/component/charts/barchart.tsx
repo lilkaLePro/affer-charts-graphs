@@ -3,7 +3,7 @@ import * as d3  from "d3";
 import React, { useEffect, useRef, useState } from "react"
 import {scaleLinear , scaleBand} from 'd3-scale'
 import applestok from '@visx/mock-data/lib/mocks/appleStock'
-import { useAppstore } from "@/store";
+import { useAppstore , useChartData } from "@/store";
 import {axisLeft , axisBottom} from 'd3-axis'
 
 
@@ -36,14 +36,12 @@ const x = scaleBand()
     .domain(data.map(d => d.color))
     .range([0, dimension.width])
     .padding(0.05)
-
 const y = scaleLinear()
-    .domain([0 , d3.max(data.map(d => d.height))])
-    .range([dimension.height , 0])
-
+    .domain([0 , d3.max(datas.map(d => d.close))])
+    .range([0 , dimension.width ])
     // axis
 const xAxis = axisBottom(x)
-const yaxis = axisLeft(y)
+const yAxis = axisLeft(y)
 
     if(!selection){
         setSelection(d3.select(svgRef.current!))
@@ -53,9 +51,10 @@ const yaxis = axisLeft(y)
         .call(xAxis)
         .attr('transform' , `translate( ${dimension.marginLeft}, ${dimension.height})`)
         
+        
         const yAxisGroup = selection
         .append('g')
-        .call(yaxis)
+        .call(yAxis)
         .attr('transform' , `translate( ${dimension.marginLeft})`)
         
         selection
@@ -74,13 +73,13 @@ const yaxis = axisLeft(y)
             .delay(( _ , i ) => i*100)
             .attr('fill' , 'orange')
             .attr('height' , d => dimension.height - y(d.height))
-            .attr('y' , d => y(d.height))
-
-
+            .attr('y' , d => y(d.height))   
+            
     }
-},[selection , data])
+},[selection , data , displayGroupex , displayGroupey ])
 
     return(<div className="flex justify-center items-center border w-[800px] h-[500px] p-6 m-2 ">
         <svg ref={svgRef} className="w-full h-full font-bold" />
     </div>)
 }
+// Je peu creer un composant Line chart ici

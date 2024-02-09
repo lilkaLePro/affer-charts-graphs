@@ -3,8 +3,11 @@
 import d3, { max, scale, select , Selection } from "d3"
 import React, { useRef, useState, useEffect } from "react"
 import {line , curveCardinal, } from 'd3-shape'
-import {axisBottom } from 'd3-axis'
+import {axisBottom , axisLeft} from 'd3-axis'
 import {scaleLinear} from 'd3-scale'
+import  appleStock ,{AppleStock} from '@visx/mock-data/lib/mocks/appleStock'
+const aStockData = appleStock
+
 
 const ini_data = [
     {height : 10 , color : 'purple'},
@@ -19,7 +22,7 @@ const ini_data = [
 ]
 
 export const CurvChart : React.FC = () => {
-    const [data , setData ] = useState(ini_data.map(d => d.height))
+    const [data , setData ] = useState(aStockData.map(d => d.close))
     const [selection , setSelection] = useState<null | Selection< SVGSVGElement | null , unknown , null , undefined >>()
     const svgRef = useRef<SVGSVGElement | null>(null)
 
@@ -27,13 +30,14 @@ export const CurvChart : React.FC = () => {
         // scales x et y
     const xScale = scaleLinear()
         .domain([0 , data.length])
-        .range([0, 700]) // 700 represente le svg width
+        .range([0, 750]) // 700 represente le svg width
         
     const yScale = scaleLinear()
         .domain([0 , max(data)])
-        .range([0, 400]) // 200 represente le svg height
+        .range([0, 500]) // 200 represente le svg height
         // creer les axis x et y
     const xAxis = axisBottom(xScale)
+    const yAxis = axisLeft(yScale)
         
         const myLine = line()
             .x((v , i ) => xScale(i))
@@ -43,7 +47,14 @@ export const CurvChart : React.FC = () => {
         if(!selection){
             setSelection(select(svgRef.current!))
         }else{
+            selection
+                .append('g')                
+                .call(xAxis)
+                .attr('transform' , `translate(${50})`)
                 
+            selection   
+                .append('g')
+                .call(yAxis)
 
             selection
                 .selectAll('path')
@@ -55,12 +66,13 @@ export const CurvChart : React.FC = () => {
                 .attr('strokewidth' , 4)
                 .select('#xAxis')
                 .call(xAxis)
+
+         
             }
     }, [data , selection])
 
-    return (<div className="w-[700px] h-[400px] flex justify-center items-center">
-        <svg ref={svgRef} className=" border w-full h-full">
-            <g id="xg" />
+    return (<div className="w-[800px] h-[500px] flex justify-center items-center">
+        <svg ref={svgRef} className="border w-full h-full">
         </svg>
     </div>)
 }
